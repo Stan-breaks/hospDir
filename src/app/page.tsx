@@ -1,100 +1,267 @@
-import Image from "next/image";
+// src/app/page.tsx
+"use client";
 
-export default function Home() {
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import {
+  SearchIcon,
+  Hospital,
+  UserCheck,
+  Star,
+  Calendar,
+  Shield,
+} from "lucide-react";
+import Link from "next/link";
+import { useRouter } from "next/navigation"; // Changed from 'next/router'
+
+const features = [
+  {
+    icon: <Hospital className="h-12 w-12 text-blue-500" />,
+    title: "Find Hospitals",
+    description:
+      "Browse through verified hospitals across Kenya, complete with ratings and facilities information.",
+  },
+  {
+    icon: <UserCheck className="h-12 w-12 text-blue-500" />,
+    title: "Verified Doctors",
+    description:
+      "Access profiles of qualified healthcare professionals with verified credentials and specializations.",
+  },
+  {
+    icon: <Star className="h-12 w-12 text-blue-500" />,
+    title: "Patient Reviews",
+    description:
+      "Read authentic reviews from real patients to make informed healthcare decisions.",
+  },
+  {
+    icon: <Calendar className="h-12 w-12 text-blue-500" />,
+    title: "Easy Appointments",
+    description:
+      "Book appointments with your chosen healthcare providers seamlessly.",
+  },
+  {
+    icon: <Shield className="h-12 w-12 text-blue-500" />,
+    title: "Verified Information",
+    description:
+      "All hospital and doctor information is verified for accuracy and reliability.",
+  },
+  {
+    icon: <SearchIcon className="h-12 w-12 text-blue-500" />,
+    title: "Smart Search",
+    description:
+      "Find healthcare providers by location, specialization, or ratings.",
+  },
+];
+
+export default function LandingPage() {
+  const router = useRouter();
+
+  // Separate component for navigation buttons to reduce code duplication
+  const NavigationButton = ({ href, variant = "default", children }) => (
+    <Link href={href}>
+      <Button
+        size="lg"
+        variant={variant}
+        className={variant === "default" ? "bg-blue-600 hover:bg-blue-700" : ""}
+      >
+        {children}
+      </Button>
+    </Link>
+  );
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className="min-h-screen">
+      {/* Hero Section */}
+      <section className="relative bg-gradient-to-b from-blue-50 to-white">
+        <div className="container mx-auto px-4 py-24">
+          <div className="text-center max-w-4xl mx-auto">
+            <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
+              Find the Best Healthcare in Kenya
+            </h1>
+            <p className="text-xl text-gray-600 mb-8">
+              Make informed decisions about your healthcare with verified
+              hospital ratings and doctor reviews all in one place.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <NavigationButton href="/register">Get Started</NavigationButton>
+              <NavigationButton href="/book" variant="outline">
+                Search Hospitals
+              </NavigationButton>
+            </div>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+      </section>
+
+      {/* Features Grid */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-12">
+            Why Choose Kenya Healthcare Portal?
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {features.map((feature, index) => (
+              <Card
+                key={index}
+                className="border border-gray-200 hover:shadow-lg transition-shadow"
+              >
+                <CardContent className="p-6">
+                  <div className="flex flex-col items-center text-center">
+                    <div className="mb-4">{feature.icon}</div>
+                    <h3 className="text-xl font-semibold mb-2">
+                      {feature.title}
+                    </h3>
+                    <p className="text-gray-600">{feature.description}</p>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Search Preview Section */}
+      <section className="py-20 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-3xl font-bold mb-8">
+              Start Your Healthcare Journey
+            </h2>
+            <div className="bg-white rounded-lg shadow-md p-6">
+              <div className="flex flex-col md:flex-row gap-4">
+                <input
+                  type="text"
+                  placeholder="Search for hospitals or doctors..."
+                  className="flex-1 p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                <Link href="/book">
+                  <Button size="lg" className="bg-blue-600 hover:bg-blue-700">
+                    <SearchIcon className="mr-2 h-4 w-4" /> Search
+                  </Button>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 bg-blue-600 text-white">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-3xl font-bold mb-4">
+            Join Kenya&apos;s Leading Healthcare Platform
+          </h2>
+          <p className="text-xl mb-8">
+            Register now to access verified healthcare information and make
+            informed decisions.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <NavigationButton href="/register" variant="secondary">
+              Register as a Patient
+            </NavigationButton>
+            <Link href="/register">
+              <Button
+                size="lg"
+                variant="outline"
+                className="bg-transparent border-white text-white hover:bg-white hover:text-blue-600"
+              >
+                Register as a Healthcare Provider
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-gray-900 text-gray-300">
+        <div className="container mx-auto px-4 py-12">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+              <h3 className="text-lg font-semibold mb-4">About Us</h3>
+              <ul className="space-y-2">
+                <li>
+                  <Link href="/register" className="hover:text-white">
+                    Our Mission
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/register" className="hover:text-white">
+                    Team
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/register" className="hover:text-white">
+                    Careers
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold mb-4">For Patients</h3>
+              <ul className="space-y-2">
+                <li>
+                  <Link href="/book" className="hover:text-white">
+                    Find Hospitals
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/register" className="hover:text-white">
+                    Find Doctors
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/register" className="hover:text-white">
+                    Write a Review
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold mb-4">
+                For Healthcare Providers
+              </h3>
+              <ul className="space-y-2">
+                <li>
+                  <Link href="/register" className="hover:text-white">
+                    Join as a Doctor
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/register" className="hover:text-white">
+                    Register Hospital
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/register" className="hover:text-white">
+                    Resources
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold mb-4">Contact</h3>
+              <ul className="space-y-2">
+                <li>
+                  <Link href="/register" className="hover:text-white">
+                    Help Center
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/register" className="hover:text-white">
+                    Contact Us
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/register" className="hover:text-white">
+                    Give Feedback
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div className="border-t border-gray-800 mt-12 pt-8 text-center">
+            <p>© 2024 Kenya Healthcare Portal. All rights reserved.</p>
+          </div>
+        </div>
       </footer>
     </div>
   );
